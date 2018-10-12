@@ -1,0 +1,6 @@
+<button type="button" name="button" (click)="getItemsFromServiceClass()">Show List</button>
+<ul class="list-group">
+  <li *ngfor="let item of itemsRecieved" class="list-group-item">
+    {{item}}
+  </li>
+</ul>

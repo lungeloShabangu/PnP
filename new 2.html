@@ -1,0 +1,895 @@
+<body class="ltr" dir="ltr" ng-class="[{ 'has-modal': hasModal, 'has-overlay-modal': hasOverlayModal, 'has-drawer': hasDrawer, 'ts-in-i-frame' : isInIFrame}, ft_responsive_design &amp;&amp; pageName ? pageName + '-page' : '']" modal-no-scroll="" style="">
+
+<script type="text/javascript">
+        window._api = {};
+
+        _api.call = function (obj) {
+            if ( obj && _api.isJson(obj) ) {
+                var domElement = document.getElementById('api');
+                var scope = angular.element(domElement).scope();
+                scope.$apply(function(){
+                    scope.pass = obj;
+                });
+                return true;
+            }
+            console.log('api call fail');
+            return false;
+        }
+
+        _api.isJson = function (str) {
+            try {
+                var o = JSON.parse(str);
+
+                // Handle non-exception-throwing cases:
+                // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+                // but... JSON.parse(null) returns 'null', and typeof null === "object",
+                // so we must check for that, too.
+                if (o && typeof o === "object" && o !== null) {
+                    return o;
+                }
+            }
+            catch (e) {}
+            return false;
+        }
+    </script>
+<api id="api"><span></span></api>
+<script type="text/javascript">
+        var dataLayer = window.dataLayer = window.dataLayer || {};
+    </script>
+
+<script type="text/javascript">
+        function fareKeepCallback(data) {
+            var obj = {};
+            obj.action = "fare-keep-callback";
+            obj.data = data;
+            _api.call(JSON.stringify(obj));
+        }
+    </script>
+
+<script type="text/javascript">
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '647547408712325',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.11',
+                status           : true
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+<script src="https://apis.google.com/js/platform.js?onload=gapiInit" async="" defer="" gapi_processed="true"></script>
+<div class="page-wrapper">
+<!-- tsHideInIFrame:  --><!-- uiView: header --><header ui-view="header" class="header ng-scope" ts-hide-in-i-frame="" autoscroll=""><div class="container header-container ng-scope landing" ng-class="{'landing':headerCtrl.isLanding, 'header-container--account': headerCtrl.isMyaccount, 'header-container--search-results': headerCtrl.isSearchResults}" ng-controller="HeaderController as headerCtrl">
+    <a ui-sref="ts-app.search" class="header-logo-link" href="">
+        <img class="header-logo" ng-src="assets/img/logos/ts-logo-ZA.svg" data-layer-reset="reset" src="assets/img/logos/ts-logo-ZA.svg">
+    </a>
+    <div class="header-nav ng-scope" ng-controller="NavigationController as navCtrl">
+        <!-- ngIf: headerCtrl.isLanding || headerCtrl.isMyaccount --><div class="header-main-links ng-scope" ng-if="headerCtrl.isLanding || headerCtrl.isMyaccount">
+            <a class="header-nav__item header-nav__item--active" ng-href="" target="_self">
+                <span class="header-nav__heading" translate=""><span class="ng-scope">Flights</span></span>
+            </a>
+            <a class="header-nav__item" ng-href="https://hotels.travelstart.com/?locale=en_ZA&amp;pos=TSTART_ZA&amp;wapb3=|c.496978|l.en_ZA|t.web|s.header-lp" target="_self" href="https://hotels.travelstart.com/?locale=en_ZA&amp;pos=TSTART_ZA&amp;wapb3=|c.496978|l.en_ZA|t.web|s.header-lp">
+                <span class="header-nav__heading" translate=""><span class="ng-scope">Hotels</span></span>
+            </a>
+            <a class="header-nav__item" ng-href="http://cars.travelstart.co.za" target="_self" href="http://cars.travelstart.co.za">
+                <span class="header-nav__heading" translate=""><span class="ng-scope">Cars</span></span>
+            </a>
+            <!-- ngIf: navCtrl.hasPackagesLink --><a class="header-nav__item ng-scope" ng-href="http://www.travelstart.co.za/lp/promotions-specials/holiday-packages" target="_self" ng-if="navCtrl.hasPackagesLink" href="http://www.travelstart.co.za/lp/promotions-specials/holiday-packages">
+                <span class="header-nav__heading" translate=""><span class="ng-scope">Packages</span></span>
+            </a><!-- end ngIf: navCtrl.hasPackagesLink -->
+        </div><!-- end ngIf: headerCtrl.isLanding || headerCtrl.isMyaccount -->
+        <div class="header-extra-links">
+            <ts-auth-menu ts-auth-menu-desktop-display="true" class="ng-scope"><span class="header-nav__dropdown dropdown" ng-class="{'header-nav__dropdown--logged-in': (isSignedIn &amp;&amp; authDetails)}" uib-dropdown="" is-open="accountDropdownOpen" on-toggle="accountDropdownToggled(open)" style="">
+    <a class="header-nav__item header-nav__item--has-icon dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+        <!-- ngIf: !isSignedIn || !authDetails --><i class="header-nav__my-trips-icon ng-scope" ng-if="!isSignedIn || !authDetails"></i><!-- end ngIf: !isSignedIn || !authDetails -->
+        <!-- ngIf: isSignedIn && authDetails -->
+        <!-- ngIf: !isSignedIn || !authDetails --><span class="header-nav__heading ng-scope" translate="" ng-if="!isSignedIn || !authDetails"><span class="ng-scope">My Trips</span></span><!-- end ngIf: !isSignedIn || !authDetails -->
+        <!-- ngIf: isSignedIn && authDetails -->
+    </a>
+    <ul class="dropdown-menu dropdown-menu--align-end item-list ng-hide" uib-dropdown-menu="" role="menu" aria-labelledby="single-button" ng-show="accountDropdownOpen" style="">
+        <!-- ngIf: !isSignedIn --><li ng-if="!isSignedIn" class="ng-scope">
+            <a href="#" class="item dropdown-menu__item" ng-click="showAuthModal($event, 'signin')" translate=""><span class="ng-scope">Sign in</span></a>
+        </li><!-- end ngIf: !isSignedIn -->
+        <!-- ngIf: !isSignedIn --><li ng-if="!isSignedIn" class="ng-scope">
+            <a href="#" class="item dropdown-menu__item" ng-click="showAuthModal($event, 'signup')" translate=""><span class="ng-scope">Sign up</span></a>
+        </li><!-- end ngIf: !isSignedIn -->
+        <!-- ngIf: isSignedIn -->
+        <!-- ngIf: isSignedIn -->
+    </ul>
+</span>
+</ts-auth-menu>
+
+            <!-- ngIf: navCtrl.haslanguageOptions -->
+        </div>
+        <div class="header-mobile-links">
+            <ts-auth-menu class="ng-scope"><a id="hamburger-link" class="hamburger-link header-nav__item" href="" ng-click="openAuthDrawer()">
+    <!-- ngIf: !isSignedIn || !authDetails --><i class="header-nav__my-trips-icon ng-scope" ng-if="!isSignedIn || !authDetails"></i><!-- end ngIf: !isSignedIn || !authDetails -->
+    <!-- ngIf: isSignedIn && authDetails -->
+</a>
+<ts-drawer-callbacks ts-drawer-id="drawerId" ts-open="openAuthDrawer" ts-close="closeAuthDrawer" ts-menu="My Trips" class="ng-isolate-scope"><span class="nav-drawer" ng-class="{'open': drawerOpen}">
+	<div class="overlay overlay--nav-drawers" ng-click="close()"></div>
+	<div class="nav-drawer__content">
+		<a href="" class="nav-drawers__close" ng-click="close()">Close</a>
+	    <h3 class="nav-drawer__heading">
+	        <span class="ng-binding">My Trips</span>
+	    </h3>
+	    <ng-transclude>
+    <ul class="nav-drawer__list ng-scope">
+        <!-- ngIf: !isSignedIn --><li class="nav-drawer__list__item ng-scope" ng-if="!isSignedIn">
+            <a class="item" id="account-sign-in-link" href="" ng-click="showAuthModal($event, 'signin'); closeAuthDrawer()">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Sign in</span></span>
+                </span>
+            </a>
+        </li><!-- end ngIf: !isSignedIn -->
+        <!-- ngIf: !isSignedIn --><li class="nav-drawer__list__item ng-scope" ng-if="!isSignedIn">
+            <a class="item" id="account-sign-up-link" href="" ng-click="showAuthModal($event, 'signup'); closeAuthDrawer()">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Sign up</span></span>
+                </span>
+            </a>
+        </li><!-- end ngIf: !isSignedIn -->
+        <!-- ngIf: isSignedIn -->
+        <!-- ngIf: isSignedIn -->
+    </ul>
+</ng-transclude>
+	</div>
+	<ts-tap-indicator ts-tap-indicator-valid-class-list="ts-typeahead-item,datepicker-table__btn" class="ng-isolate-scope"></ts-tap-indicator>
+</span>
+</ts-drawer-callbacks>
+</ts-auth-menu>
+            <a id="hamburger-link" class="hamburger-link header-nav__item" href="" ng-click="headerCtrl.openNav()">
+                <i class="header-nav__menu header-nav__item__icon"></i>
+            </a>
+        </div>
+
+        <!-- ngInclude: 'general/components/navigation/navigation-drawer.tpl.html' --><div ng-include="'general/components/navigation/navigation-drawer.tpl.html'" class="nav-drawer ng-scope" ng-class="{'open': headerCtrl.navDrawerOpen}"><div class="overlay overlay--nav-drawers ng-scope" ng-click="headerCtrl.closeNav()"></div>
+<div class="nav-drawer__content ng-scope">
+    <a href="" class="nav-drawers__close" ng-click="headerCtrl.closeNav()">Close</a>
+    <h3 class="nav-drawer__heading">
+        <span translate=""><span class="ng-scope">Menu</span></span>
+    </h3>
+    <ul class="nav-drawer__list item-list">
+        <li class="active nav-drawer__list__item">
+            <a class="item" href="" ui-sref="ts-app.search" ng-click="headerCtrl.closeNav()">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Flights</span></span>
+                </span>
+            </a>
+        </li>
+        <!-- ngIf: navCtrl.hasHotelsLink --><li class="nav-drawer__list__item ng-scope" ng-class="{active: isActive('/hotels')}" ng-if="navCtrl.hasHotelsLink">
+            <a class="item" ng-href="https://hotels.travelstart.com/?locale=en_ZA&amp;pos=TSTART_ZA&amp;wapb3=|c.496978|l.en_ZA|t.web|s.header-lp" target="_self" href="https://hotels.travelstart.com/?locale=en_ZA&amp;pos=TSTART_ZA&amp;wapb3=|c.496978|l.en_ZA|t.web|s.header-lp">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Hotels</span></span>
+                </span>
+            </a>
+        </li><!-- end ngIf: navCtrl.hasHotelsLink -->
+        <!-- ngIf: navCtrl.hasCarsLink --><li class="nav-drawer__list__item ng-scope" ng-class="{active: isActive('/cars')}" ng-if="navCtrl.hasCarsLink">
+            <a class="item" ng-href="http://cars.travelstart.co.za" target="_self" href="http://cars.travelstart.co.za">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Cars</span></span>
+                </span>
+            </a>
+        </li><!-- end ngIf: navCtrl.hasCarsLink -->
+        <!-- ngIf: navCtrl.hasPackagesLink --><li class="nav-drawer__list__item ng-scope" ng-class="{active: isActive('/packages')}" ng-if="navCtrl.hasPackagesLink">
+            <a class="item" ng-href="http://www.travelstart.co.za/lp/promotions-specials/holiday-packages" target="_self" href="http://www.travelstart.co.za/lp/promotions-specials/holiday-packages">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text">
+                        <span translate=""><span class="ng-scope">Packages</span></span>
+                    </span>
+                </span>
+            </a>
+        </li><!-- end ngIf: navCtrl.hasPackagesLink -->
+        <li class="nav-drawer__list__item" ng-class="{active: isActive('/contact')}">
+            <a class="item" id="contact-us-link" ng-href="https://www.travelstart.co.za/lp/contact-us?language=en" target="_self" href="https://www.travelstart.co.za/lp/contact-us?language=en">
+                <span class="item-list__text_wrap">
+                    <span class="item-list__text" translate=""><span class="ng-scope">Contact Details</span></span>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- ngIf: navCtrl.haslanguageOptions -->
+</div>
+</div>
+    </div>
+
+</div>
+</header><!-- end ngIf: function(){return!t.isInIFrame()} -->
+<!-- uiView: content --><main ui-view="content" class="content ng-scope" autoscroll="isInIFrame"><div class="content-wrapper ng-scope">
+    <!-- ngIf: !isLoginPage --><div login-dialog="" ng-if="!isLoginPage" class="ng-scope"></div><!-- end ngIf: !isLoginPage -->
+    <section ng-style="{'background-color': searchViewController.baseColor}" ng-class="{'search' : searchViewController.ft_responsive_design}" class="search">
+
+        <section ng-style="{ 'color': searchViewController.textColor}">
+            <ts-split-test ts-test-group="default" ts-test-id="BGT-424" class="ng-isolate-scope"><!-- ngIf: isVisible --><ng-transclude ng-if="isVisible" class="ng-scope">
+                <h1 class="sp-main-header section-header search__header ng-scope" translate=""><span class="ng-scope">Search and Book Cheap Flights</span></h1>
+            </ng-transclude><!-- end ngIf: isVisible --></ts-split-test>
+            <ts-split-test ts-test-group="control" ts-test-id="BGT-424" class="ng-isolate-scope"><!-- ngIf: isVisible --></ts-split-test>
+            <ts-split-test ts-test-group="variation" ts-test-id="BGT-424" class="ng-isolate-scope"><!-- ngIf: isVisible --></ts-split-test>
+            <search-form class="ng-isolate-scope"><!-- ngInclude: contentUrl --><div ng-include="contentUrl" class="ng-scope"><div class="search-form search-form--horizontal ng-scope">
+    <div class="search-form__body">
+        <!-- ngIf: searchFormController.searchErrors.validationErrors -->
+
+        <!-- ngIf: !searchFormController.isInline --><div class="section section--padded ng-scope" ng-if="!searchFormController.isInline">
+            <div id="trip-type-radio-group" class="trip-type-radio-group btn-group">
+                <label class="btn btn-group__btn ng-pristine ng-untouched ng-valid" ng-model="searchFormController.searchData.tripType" uib-btn-radio="'oneway'" translate=""><span class="ng-scope">One way</span></label>
+                <label class="btn btn-group__btn ng-pristine ng-untouched ng-valid active" ng-model="searchFormController.searchData.tripType" uib-btn-radio="'return'" translate=""><span class="ng-scope">Return</span></label>
+                <label class="btn btn-group__btn ng-pristine ng-untouched ng-valid" ng-model="searchFormController.searchData.tripType" uib-btn-radio="'multi'" translate=""><span class="ng-scope">Multi city</span></label>
+            </div>
+        </div><!-- end ngIf: !searchFormController.isInline -->
+
+        <div class="search-form__row" ng-class="{'search-form__row--multi': searchFormController.searchData.tripType === 'multi'}">
+
+            <!-- Test code for Logger <a ng-click="causeError()">Cause Error</a><p bn-test>Mousing over this <P> will cause an error in the console.</p> -->
+            <div class="search-form__itins">
+                <!-- ngRepeat: itin in searchFormController.searchData.itineraries | limitTo:searchFormController.itinLimit --><div ng-repeat="itin in searchFormController.searchData.itineraries | limitTo:searchFormController.itinLimit" ng-class="{'search-form__itin--last': $last}" class="ng-scope search-form__itin--last">
+                    <div class="search-form__itin">
+                        <div class="search-form__locations">
+                            
+                            <div class="search-form__origin">
+                                <label class="search-form__label" translate=""><span class="ng-scope">From</span></label>
+
+                                <ts-search-airports-depart apply-class="search-form__input" itin-id="5c6c77d1-9712-450d-97a0-fba483e5ef59" show-return-airport="searchFormController.showReturnAirport(itinId)" close="searchFormController.airportClosed()" class="ng-isolate-scope"><div class="airports-inline-wrapper ">
+    <div class="rendered-input__wrapper search-form__airport--wrapper search-form__input" ng-class="airportsController.applyClass">
+        <input id="airports-inline-orig-5c6c77d1-9712-450d-97a0-fba483e5ef59" type="text" clear-field="" clear-field-no-wrap="true" class="rendered-input__input rendered-input__input--clear-field ng-pristine ng-untouched ng-valid clear-field__input search-form__input" ng-class="airportsController.applyClass" ng-model="airportsController.airport" placeholder="Enter departure city" uib-typeahead="airport for airport in airportsController.getAirport($viewValue)" typeahead-loading="airportsController.loadingLocations" typeahead-no-results="airportsController.noResults" typeahead-popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html" typeahead-template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" typeahead-on-select="airportsController.onSelect($item, $model, $label, $event)" typeahead-min-length="0" typeahead-focus-on-select="false" ng-focus="airportsController.focused()" ng-blur="airportsController.blurred()" ng-keyup="airportsController.keyup($event)" ts-append-to="airportsController.rootAirportWrapper" typeahead-append-to-body="true" ts-extend-typeahead-scope="{showingPopularFlights: airportsController.showingPopularFlights, icons_url: airportsController.iconsUrl, additional_class: 'dropdown-menu-' + airportsController.direction + '-' + airportsController.itinId}" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-79-677"><span ng-show="enabled" ng-mousedown="reset()" class="clear-field__icon ng-scope ng-hide"></span>
+
+        <!--ng-class="{'animated fadeIn' : airportsController.hasSelection}"-->
+        <!-- ngIf: airportsController.hasSelection -->
+    </div>
+        
+    <!-- ngIf: airportsController.loadingLocations -->
+    <!-- ngIf: airportsController.noResults && !airportsController.searchError -->
+    <!-- ngIf: airportsController.searchError -->
+</div>
+</ts-search-airports-depart>
+                            </div>
+                            <div class="search-form__destination">
+                                <label class="search-form__label" translate=""><span class="ng-scope">To</span></label>
+
+                                <ts-search-airports-return apply-class="search-form__input" itin-id="5c6c77d1-9712-450d-97a0-fba483e5ef59" show-depart-date="searchFormController.showDepartDate(itinId)" close="searchFormController.airportClosed()" class="ng-isolate-scope"><div class="airports-inline-wrapper ">
+    <div class="rendered-input__wrapper search-form__airport--wrapper search-form__input" ng-class="airportsController.applyClass">
+        <input id="airports-inline-dest-5c6c77d1-9712-450d-97a0-fba483e5ef59" type="text" clear-field="" clear-field-no-wrap="true" class="rendered-input__input rendered-input__input--clear-field ng-pristine ng-untouched ng-valid clear-field__input search-form__input" ng-class="airportsController.applyClass" ng-model="airportsController.airport" placeholder="Enter arrival city" uib-typeahead="airport for airport in airportsController.getAirport($viewValue)" typeahead-loading="airportsController.loadingLocations" typeahead-no-results="airportsController.noResults" typeahead-popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html" typeahead-template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" typeahead-on-select="airportsController.onSelect($item, $model, $label, $event)" typeahead-min-length="0" typeahead-focus-on-select="false" ng-focus="airportsController.focused()" ng-blur="airportsController.blurred()" ng-keyup="airportsController.keyup($event)" ts-append-to="airportsController.rootAirportWrapper" typeahead-append-to-body="true" ts-extend-typeahead-scope="{showingPopularFlights: airportsController.showingPopularFlights, icons_url: airportsController.iconsUrl, additional_class: 'dropdown-menu-' + airportsController.direction + '-' + airportsController.itinId}" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-81-7988"><span ng-show="enabled" ng-mousedown="reset()" class="clear-field__icon ng-scope ng-hide"></span>
+
+        <!--ng-class="{'animated fadeIn' : airportsController.hasSelection}"-->
+        <!-- ngIf: airportsController.hasSelection -->
+    </div>
+        
+    <!-- ngIf: airportsController.loadingLocations -->
+    <!-- ngIf: airportsController.noResults && !airportsController.searchError -->
+    <!-- ngIf: airportsController.searchError -->
+</div>
+</ts-search-airports-return>
+                            </div>
+                        </div>
+
+                        <div class="search-form__dates">
+                            <div class="search-form__depart-date">
+                                <span id="depart-date-link-5c6c77d1-9712-450d-97a0-fba483e5ef59" class="search-form__depart-date-action search-form__date-action search-form__round-trip" ng-click="searchFormController.openDepartDateInput(itin.id)" ng-class="[searchFormController.searchData.tripType === 'return' ? 'search-form__round-trip': 'input-holder--has-arrow']">
+                                    <!-- ngIf: itin.departDate -->
+                                    <!-- ngIf: !itin.departDate --><span class="text-group ng-scope" ng-if="!itin.departDate">
+                                        <span class="text-group__outer">&nbsp;</span>
+                                        <span class="text-group__body">
+                                            <span class="text-group__heading" translate=""><span class="ng-scope">Depart</span></span>
+                                            <span class="text-group__subheading" translate=""><span class="ng-scope">Date</span></span>
+                                        </span>
+                                    </span><!-- end ngIf: !itin.departDate -->
+                                </span>
+                            </div>
+                            <!-- ngIf: searchFormController.searchData.tripType === 'return' --><span class="dates-block--return ng-scope" ng-if="searchFormController.searchData.tripType === 'return'"></span><!-- end ngIf: searchFormController.searchData.tripType === 'return' -->
+                            <!-- ngIf: searchFormController.searchData.tripType === 'oneway' -->
+                            <div class="search-form__return-date">
+                                <!-- ngIf: searchFormController.searchData.tripType === 'return' --><span id="return-date-link-5c6c77d1-9712-450d-97a0-fba483e5ef59" ng-if="searchFormController.searchData.tripType === 'return'" class="search-form__return-date-action search-form__date-action ng-scope search-form__round-trip" ng-click="searchFormController.openReturnDateInput(itin.id)" ng-class="searchFormController.searchData.tripType === 'return' ? 'search-form__round-trip' : ''">
+                                    <!-- ngIf: itin.returnDate -->
+                                    <!-- ngIf: !itin.returnDate --><span class="text-group ng-scope" ng-if="!itin.returnDate">
+                                        <span class="text-group__outer">&nbsp;</span>
+                                        <span class="text-group__body">
+                                            <span class="text-group__heading" translate=""><span class="ng-scope">Return</span></span>
+                                            <span class="text-group__subheading" translate=""><span class="ng-scope">Date</span></span>
+                                        </span>
+                                    </span><!-- end ngIf: !itin.returnDate -->
+                                </span><!-- end ngIf: searchFormController.searchData.tripType === 'return' -->
+                                <!-- ngIf: searchFormController.searchData.tripType === 'oneway' -->
+                            </div>
+                            <!-- ngIf: $index > 0 && searchFormController.searchData.tripType === 'multi' -->
+                        </div>
+                    </div>
+                    <div class="search-form__itin">
+                        <div class="search-form__locations-errors">
+                            <!-- ngIf: searchFormController.validateItin(itin, 'odoValid') -->
+                            <!-- ngIf: searchFormController.validateItin(itin, 'odoPopulated') -->
+                        </div>
+                        <div class="search-form__dates-errors">
+                            <!-- ngIf: searchFormController.validateItin(itin, 'dateValid') -->
+                        </div>
+                    </div>
+                </div><!-- end ngRepeat: itin in searchFormController.searchData.itineraries | limitTo:searchFormController.itinLimit -->
+                <!-- end .itineraries -->
+            </div>
+
+            <div class="search-form__travellers">
+                <span id="add-traveller-link" class="search-form__travellers-action" ng-click="searchFormController.openTravellersInput()">
+                    <span class="text-group text-group--single">
+                        <span class="text-group__outer ng-binding">1</span>
+                        <span class="text-group__body">
+                            <span class="text-group__heading">
+                                <span translate="" translate-n="searchFormController.getTravellerCount()" translate-plural="Travellers"><span class="ng-scope">Traveller</span></span>
+                            </span>
+                            <span class="text-group__subheading">
+                                <span translate="" translate-plural=" Adults" translate-n="searchFormController.travellers.adults"><span class="ng-scope">1 Adult</span></span>
+                                <!-- ngIf: searchFormController.travellers.children > 0 -->
+                                <!-- ngIf: searchFormController.travellers.infants > 0 -->
+                            </span>
+                        </span>
+                    </span>
+                </span>
+                <!-- ngIf: searchFormController.validateSearchDataItem('travellersValid') -->
+            </div>
+
+            <div class="search-form__submit">
+                <button id="search-for-flights-button" ng-class="{'btn--primary-disabled':!searchFormController.isInline &amp;&amp; !searchFormController.validSearch &amp;&amp; searchFormController.showValidationErrors, 'btn--primary': !searchFormController.isInline, 'btn--secondary': searchFormController.isInline, 'btn--secondary-disabled': searchFormController.isInline &amp;&amp; !searchFormController.validSearch &amp;&amp; searchFormController.showValidationErrors}" ng-click="searchFormController.submitSearch()" class="btn btn--search btn--primary btn--large" translate=""><span class="ng-scope">Search</span></button>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="search-form__more-options search-options">
+                <!-- ngIf: searchFormController.searchData.tripType === 'multi' -->
+                <!-- ngIf: searchFormController.ft_mtn_loyalty_subscribe && !searchFormController.isInline --><label class="mtn-subscribe__cta ng-scope" ng-if="searchFormController.ft_mtn_loyalty_subscribe &amp;&amp; !searchFormController.isInline" style="">
+                    <input type="checkbox" ng-model="searchFormController.mtnClaimDiscount.value" class="ng-pristine ng-untouched ng-valid">
+                    <span translate=""><span class="ng-scope">MTN user? Claim your discount</span></span>
+                </label><!-- end ngIf: searchFormController.ft_mtn_loyalty_subscribe && !searchFormController.isInline -->
+                <span id="more-options-link" class="search-form__more-options-action" ng-click="searchFormController.toggleMoreOptionsInput()">
+                    <span class="more-options__label" translate="" ng-class="{'more-options__label--open' : searchFormController.moreOptionsOpen}"><span class="ng-scope">More options</span></span>
+                </span>
+                <!-- ngIf: searchFormController.moreOptionsOpen -->
+            </div>
+
+            <!-- ngIf: !searchFormController.isInline --><div ng-if="!searchFormController.isInline" class="ng-scope">
+                <!-- ngIf: searchFormController.searchErrors.deeplinkError -->
+
+                <!-- ngIf: searchFormController.searchErrors.noResults -->
+            </div><!-- end ngIf: !searchFormController.isInline -->
+        </div>
+    </div>
+    <!-- ngIf: searchFormController.ft_mtn_loyalty_subscribe && searchFormController.showMTNDiscountForm -->
+</div>
+
+<!--desktop components-->
+<!-- ngIf: searchFormController.anyInputOpen() -->
+</div></search-form>
+        </section>
+        <!-- ngIf: searchViewController.ft_responsive_design --><!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/usps/usps.tpl.html' --><section ng-if="searchViewController.ft_responsive_design" class="usps ng-scope" ng-include="'search/directives/usps/usps.tpl.html'" ts-hide-in-i-frame=""><div class="usp__item ng-scope">
+    <div class="usp__body">
+      <img class="usp_img" ng-src="assets/svg/hand-cash.svg" src="assets/svg/hand-cash.svg">
+      <div class="usp__content">
+        <p class="usp__text" translate=""><span class="ng-scope">Bringing you the best fares from all airlines</span></p>
+      </div>
+    </div>
+</div>
+<div class="usp__item ng-scope">
+    <div class="usp__body">
+      <img class="usp_img" ng-src="assets/svg/phone.svg" src="assets/svg/phone.svg">
+      <div class="usp__content">
+        <p class="usp__text" translate=""><span class="ng-scope">Expert assistance from booking to departure</span></p>
+      </div>
+    </div>
+</div>
+<div class="usp__item ng-scope">
+    <div class="usp__body">
+      <img class="usp_img" ng-src="assets/svg/world-plane.svg" src="assets/svg/world-plane.svg">
+      <div class="usp__content">
+        <p class="usp__text" translate=""><span class="ng-scope">Online destination for planning your travels</span></p>
+      </div>
+    </div>
+</div>
+</section><!-- end ngIf: function(){return e.$eval(o)&&!t.isInIFrame()} --><!-- end ngIf: searchViewController.ft_responsive_design -->
+    </section>
+
+    <ts-recent-searches><!-- ngIf: recentSearchesController.isRecentSearchesEnabled && recentSearchesController.recentSearches.length > 0 -->
+</ts-recent-searches>
+
+    <ts-split-test ts-test-group="default" ts-test-id="WHY-178" class="ng-isolate-scope"><!-- ngIf: isVisible --><ng-transclude ng-if="isVisible" class="ng-scope">
+        <!-- ngIf: searchViewController.ft_responsive_design && searchViewController.show_specials --><!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/specials/specials.tpl.html' --><section ng-if="searchViewController.ft_responsive_design &amp;&amp; searchViewController.show_specials" class="specials ng-scope" ng-include="'search/directives/specials/specials.tpl.html'" ts-hide-in-i-frame=""><header class="specials__header ng-scope">
+    <h2 class="specials__heading" translate=""><span class="ng-scope">Flight Specials</span></h2>
+</header>
+<div class="specials__body ng-scope">
+    <!-- ngRepeat: special in searchViewController.specials | limitTo:2 --><article class="specials-card ng-scope" role="banner" ng-repeat="special in searchViewController.specials | limitTo:2" style="">
+        <div class="specials-card__container">
+            <a href="http://www.travelstart.co.za/lp/flight-specials/flash-flight-sale" class="specials-card__action" ng-style="{'background-image':'url(https://d24ndt2yiijez0.cloudfront.net/uploads/image/asset/11299/ZA_4May_FS_Tile_NOWON_2_040518.jpg)'}" track=":Banner:ZA-May-Flash-Sale-Main-HP" target="_self" style="background-image: url(&quot;https://d24ndt2yiijez0.cloudfront.net/uploads/image/asset/11299/ZA_4May_FS_Tile_NOWON_2_040518.jpg&quot;);">
+            <!-- ngIf: special.sponsor_code -->
+            </a>
+            <header class="specials-card__body">
+            <h4 class="specials-card__heading ng-binding">Flash Sale Now On!</h4>
+            <p class="specials-card__subheading ng-binding">Major savings from 7 - 9 May 2018</p>
+            </header>
+            <div class="specials-card__cta">
+                <a href="http://www.travelstart.co.za/lp/flight-specials/flash-flight-sale" class="btn btn--primary" translate=""><span class="ng-scope">Find out more</span></a>
+            </div>
+        </div>
+    </article><!-- end ngRepeat: special in searchViewController.specials | limitTo:2 --><article class="specials-card ng-scope" role="banner" ng-repeat="special in searchViewController.specials | limitTo:2">
+        <div class="specials-card__container">
+            <a href="http://www.travelstart.co.za/lp/airlines/mango-airlines" class="specials-card__action" ng-style="{'background-image':'url(https://d24ndt2yiijez0.cloudfront.net/uploads/image/asset/11316/ZA_4May_FS_Tile_DOM_2_040518.jpg)'}" track=":Banner:ZA-May-Flash-Sale-Domestic-2-HP" target="_self" style="background-image: url(&quot;https://d24ndt2yiijez0.cloudfront.net/uploads/image/asset/11316/ZA_4May_FS_Tile_DOM_2_040518.jpg&quot;);">
+            <!-- ngIf: special.sponsor_code --><div ng-if="special.sponsor_code" class="sponsor ng-scope">
+                <img class="sponsor__img" ng-src="assets/img/carriers/retina48px/carrier-JE.png" src="assets/img/carriers/retina48px/carrier-JE.png">
+            </div><!-- end ngIf: special.sponsor_code -->
+            </a>
+            <header class="specials-card__body">
+            <h4 class="specials-card__heading ng-binding">Ends Tomorrow!</h4>
+            <p class="specials-card__subheading ng-binding">Save big on local routes</p>
+            </header>
+            <div class="specials-card__cta">
+                <a href="http://www.travelstart.co.za/lp/airlines/mango-airlines" class="btn btn--primary" translate=""><span class="ng-scope">Find out more</span></a>
+            </div>
+        </div>
+    </article><!-- end ngRepeat: special in searchViewController.specials | limitTo:2 -->
+</div>
+<!-- ngIf: false -->
+</section><!-- end ngIf: function(){return e.$eval(o)&&!t.isInIFrame()} --><!-- end ngIf: searchViewController.ft_responsive_design && searchViewController.show_specials -->
+    </ng-transclude><!-- end ngIf: isVisible --></ts-split-test>
+
+    <ts-split-test ts-test-group="control" ts-test-id="WHY-178" class="ng-isolate-scope"><!-- ngIf: isVisible --></ts-split-test>
+
+    <ts-split-test ts-test-group="variation" ts-test-id="WHY-178" class="ng-isolate-scope"><!-- ngIf: isVisible --></ts-split-test>
+
+    <!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/banner-homepage/banner-homepage.tpl.html' --><section ng-include="'search/directives/banner-homepage/banner-homepage.tpl.html'" ts-hide-in-i-frame="" class="ng-scope"><!-- ngIf: searchViewController.fullPageSpecialsBanner -->
+</section><!-- end ngIf: function(){return!t.isInIFrame()} -->
+
+    <!-- ngIf: searchViewController.showAirlinesAndDestinationsCards --><!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/airlines-destinations/airlines-destinations.tpl.html' --><section ng-if="searchViewController.showAirlinesAndDestinationsCards" class="airlines-destinations ng-scope" ng-class="[{'airlines-destinations--top-padding': searchViewController.fullPageSpecialsBanner}]" ng-include="'search/directives/airlines-destinations/airlines-destinations.tpl.html'" ts-hide-in-i-frame="" style=""><h2 class="airlines-destinations__heading ng-scope" translate=""><span class="ng-scope">Decisions, decisions, decisions...</span></h2>
+
+<div class="airlines-destinations__cards ng-scope">
+    <!-- ngRepeat: card in searchViewController.airlinesAndDestinationsCards --><article class="airlines-destinations-card airlines-destinations-card--first ng-scope" ng-repeat="card in searchViewController.airlinesAndDestinationsCards">
+        <div class="airlines-destinations-card__body">
+            <a ng-href="http://www.travelstart.co.za/lp/airlines/list" class="airlines-destinations-card__icon airlines-destinations-card__icon--airlines" ng-class="card.iconClass" href="http://www.travelstart.co.za/lp/airlines/list"></a>
+            <h4 class="airlines-destinations-card__heading ng-binding">Need help choosing an airline?</h4>
+            <div class="airlines-destinations-card__button">
+                <a ng-href="http://www.travelstart.co.za/lp/airlines/list" class="btn btn--primary ng-binding" href="http://www.travelstart.co.za/lp/airlines/list">View all</a>
+            </div>
+        </div>
+    </article><!-- end ngRepeat: card in searchViewController.airlinesAndDestinationsCards --><article class="airlines-destinations-card airlines-destinations-card--first ng-scope" ng-repeat="card in searchViewController.airlinesAndDestinationsCards">
+        <div class="airlines-destinations-card__body">
+            <a ng-href="http://www.travelstart.co.za/lp/destinations" class="airlines-destinations-card__icon airlines-destinations-card__icon--destinations" ng-class="card.iconClass" href="http://www.travelstart.co.za/lp/destinations"></a>
+            <h4 class="airlines-destinations-card__heading ng-binding">Looking for destination inspiration?</h4>
+            <div class="airlines-destinations-card__button">
+                <a ng-href="http://www.travelstart.co.za/lp/destinations" class="btn btn--primary ng-binding" href="http://www.travelstart.co.za/lp/destinations">View all</a>
+            </div>
+        </div>
+    </article><!-- end ngRepeat: card in searchViewController.airlinesAndDestinationsCards -->
+</div>
+</section><!-- end ngIf: function(){return e.$eval(o)&&!t.isInIFrame()} --><!-- end ngIf: searchViewController.showAirlinesAndDestinationsCards -->
+
+    <!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/about-homepage/about-homepage.tpl.html' --><section class="container about-homepage__container ng-scope" ng-include="'search/directives/about-homepage/about-homepage.tpl.html'" ts-hide-in-i-frame=""><div class="about-homepage ng-scope">
+    <div class="about-homepage__long-description">
+        <h3 class="about-homepage__header ng-binding">Travelstart: Cheap flights, incredible hotels and affordable car rentals</h3>
+        <p class="about-homepage__text">
+          <ng-bind-html ng-bind-html="'about_home_long_description' | tsTranslateKeyHideNotFound | tsTranslate : {linkClass: 'about-homepage--link'} " class="ng-binding">Travelstart is Africa’s leading online travel agency. Based in sunny <a href="https://www.travelstart.co.za/lp/cape-town/flights" class="about-homepage--link" target="_self">Cape Town</a>, we have offices across Africa and the Middle East where hundreds of Travelstarters are dedicated to rocking your travel world. We want our customers to spend less time planning their travels and more time on holiday. Our mission is to save you time, money and stress with our simple online booking platform. You can search, compare and book your travel all in one place.</ng-bind-html>
+        </p>
+    </div>
+    <div class="about-homepage__split-wrapper">
+        <div class="about-homepage__split">
+            <div class="about-homepage__group">
+                <h3 class="about-homepage__header ng-binding">What does Travelstart do?</h3>
+                <p class="about-homepage__text">
+                  <ng-bind-html ng-bind-html="'about_home_left_description' | tsTranslateKeyHideNotFound | tsTranslate : {linkClass: 'about-homepage--link'} " class="ng-binding">Travelstart is your one-stop online travel shop. So, forget trawling the web for the latest <a href="https://www.travelstart.co.za/lp/flight-specials" class="about-homepage--link" target="_self">flight specials</a>. With low airfares on <a href="https://www.travelstart.co.za/lp/cheap-international-flights" class="about-homepage--link" target="_self">international</a> and <a href="https://www.travelstart.co.za/lp/cheap-domestic-flights" class="about-homepage--link" target="_self">domestic</a> flights from all your favourite airlines, vehicle hire options from top car rental companies and hotel reservations bookable for properties on every continent, we offer something for every traveller’s budget. For custom <a href="https://www.travelstart.co.za/lp/promotions-specials/holiday-packages" class="about-homepage--link" target="_self">holiday packages</a> to anywhere you can imagine, contact our travel experts and let’s start planning!</ng-bind-html>
+                </p>
+            </div>
+        </div>
+        <div class="about-homepage__split">
+            <div class="about-homepage__group">
+                <h3 class="about-homepage__header ng-binding">Why book with Travelstart?</h3>
+                <p class="about-homepage__text">
+                  <ng-bind-html ng-bind-html="'about_home_right_description' | tsTranslateKeyHideNotFound | tsTranslate : {linkClass: 'about-homepage--link'} " class="ng-binding">Ain’t nobody got time for queues, spending hours hunting down deals or changing your plans to accommodate an airlines’ schedule. At Travelstart all the best travel suppliers and specials can be found, compared and booked quickly and safely, using multiple payment methods. You can mix and match departing and return cheap flights on different airlines and book flexi-tickets. Treat yourself to peace of mind and prepare your VISA application – with travel insurance too!</ng-bind-html>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</section><!-- end ngIf: function(){return!t.isInIFrame()} -->
+
+    <!-- ngIf: searchViewController.ft_responsive_design && searchViewController.show_useful_links --><!-- tsHideInIFrame:  --><!-- ngInclude: 'search/directives/useful-links/useful-links.tpl.html' --><section ng-if="searchViewController.ft_responsive_design &amp;&amp; searchViewController.show_useful_links" class="container useful-links ng-scope" ng-include="'search/directives/useful-links/useful-links.tpl.html'" ts-hide-in-i-frame=""><!-- ngRepeat: groups in searchViewController.useful_links --><div class="useful-links__split ng-scope" ng-repeat="groups in searchViewController.useful_links" style="">
+    <!-- ngIf: $index === 0 --><div ng-if="$index === 0" class="useful-links__group useful-links__signup ng-scope">
+        <div class="signup-form">
+            <newsletter-subscribe class="ng-scope"><div class="newsletter-subscribe">
+    <h2 class="newsletter-subscribe__header" translate=""><span class="ng-scope">Subscribe to our newsletter</span></h2>
+    <form ng-action="http://www.pages02.net/travelstart/coza-homepage-signups/coza-homepage-generic" pageid="6771136" siteid="277839" parentpageid="6771134" name="newsletterForm" ng-submit="subscribe(credentials)" novalidate="" class="ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-valid-email">
+        <div class="input-field--newsletter-subscribe" ng-class="{ 'has-error' : newsletterForm.name.$invalid &amp;&amp; !newsletterForm.name.$pristine }">
+            <input class="input input--block ng-pristine ng-untouched ng-valid" type="text" id="name" ng-model="credentials.name" placeholder="Enter first name" name="name">
+        </div>
+        <div class="input-group input-field--newsletter-subscribe" ng-class="{ 'has-error' : newsletterForm.email.$invalid &amp;&amp; newsletterForm.email.$dirty }">
+            <input class="input input-group__input ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-pattern ng-valid-email" type="email" id="email" ng-model="credentials.email" placeholder="Enter your email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required="">
+            <span class="input-group__btn">
+                <button class="btn btn--primary btn--centered btn--block" ng-class="{'btn--newsletter-submitted':newsletterForm.$submitted, '': !newsletterForm.$valid}" ng-disabled="newsletterForm.$submitted" type="submit" translate=""><span class="ng-scope">Subscribe</span></button>
+            </span>
+        </div>
+        <p ng-show="newsletterForm.email.$invalid &amp;&amp; newsletterForm.email.$dirty" class="help-block newsletter-subscribe__message newsletter-subscribe__message--error ng-hide" translate=""><span class="ng-scope">Please enter a valid e-mail</span></p>
+    </form>
+    <!-- ngIf: signUpSuccess === true -->
+    <!-- ngIf: signUpSuccess === false -->
+</div>
+</newsletter-subscribe>
+        </div>
+    </div><!-- end ngIf: $index === 0 -->
+    
+    <!-- ngRepeat: group in groups --><div class="useful-links__group useful-links__plan-trip" ng-repeat="group in groups">
+        <h3 class="useful-links__header ng-binding">Plan your trip</h3>
+        <ul class="useful-links__list">
+            <!-- ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/products-services/overview" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:products-services" target="_self">Products &amp; Services</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/travellers-guide" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:travellers-guide" target="_self">Travellers Guide</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/destinations" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:destinations" target="_self">Destinations</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/promotions-specials/holiday-packages" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:holiday-packages" target="_self">Holiday Packages</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/visa-free-countries" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:visa-free-countries" target="_self">Visa Free Countries</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/blog" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:blog" target="_self">Blog</a>
+            </li><!-- end ngRepeat: item in group.items -->
+            <!-- ngIf: searchViewController.useContactForm && $parent.$index === 1 && $index === 1 -->
+        </ul>
+    </div><!-- end ngRepeat: group in groups -->
+</div><!-- end ngRepeat: groups in searchViewController.useful_links --><div class="useful-links__split ng-scope" ng-repeat="groups in searchViewController.useful_links">
+    <!-- ngIf: $index === 0 -->
+    
+    <!-- ngRepeat: group in groups --><div class="useful-links__group " ng-repeat="group in groups">
+        <h3 class="useful-links__header ng-binding">Partners</h3>
+        <ul class="useful-links__list">
+            <!-- ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/become-an-affiliate" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:become-an-affiliate" target="_self">Become an Affiliate</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="//nextgen.travel/next/home?language=en" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:login-to-next" target="_self">Login to Next</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/link-to-us" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:link-to-us" target="_self">Link to Us</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.biz" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:business-travel" target="_self">Business Travel</a>
+            </li><!-- end ngRepeat: item in group.items -->
+            <!-- ngIf: searchViewController.useContactForm && $parent.$index === 1 && $index === 1 -->
+        </ul>
+    </div><!-- end ngRepeat: group in groups --><div class="useful-links__group " ng-repeat="group in groups">
+        <h3 class="useful-links__header ng-binding">Need Help?</h3>
+        <ul class="useful-links__list">
+            <!-- ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/contact-us" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:contact-us" target="_self">Contact Us</a>
+            </li><!-- end ngRepeat: item in group.items --><li class="useful-links__list-item ng-scope" ng-repeat="item in group.items">
+                <a href="https://www.travelstart.co.za/lp/faq" class="useful-links__list-action ng-binding" track="Homepage:Footer-Links:faq" target="_self">FAQ</a>
+            </li><!-- end ngRepeat: item in group.items -->
+            <!-- ngIf: searchViewController.useContactForm && $parent.$index === 1 && $index === 1 -->
+        </ul>
+    </div><!-- end ngRepeat: group in groups -->
+</div><!-- end ngRepeat: groups in searchViewController.useful_links -->
+</section><!-- end ngIf: function(){return e.$eval(o)&&!t.isInIFrame()} --><!-- end ngIf: searchViewController.ft_responsive_design && searchViewController.show_useful_links -->
+
+    <!-- ngIf: searchViewController.ft_responsive_design --><!-- tsHideInIFrame:  --><section ng-if="searchViewController.ft_responsive_design" flapp-banner="" class="flapp-banner ng-scope ng-isolate-scope" ts-hide-in-i-frame=""><span class="flapp-banner__img"></span>
+
+<div class="flapp-banner__form-group">
+  <div class="flapp-banner__form">
+      <h4 class="flapp-banner__heading" translate=""><span class="ng-scope">Download our free app today</span></h4>
+      <ts-app-link-sender class="flapp-banner__link-sender ng-scope"><form class="ng-pristine ng-valid">
+    <div class="app-link-sms__form">
+        <div class="app-link-sms__input-group">
+            <div class="app-link-sms__country-code">
+                <ts-dropdown-loader bind-id="id" bind-display="shortDisplay" source-method="tsAppLinkSenderController.getDialingCodes" default-value="tsAppLinkSenderController.defaultDialingCodeCountry" default-value-prop="isoCode" ng-model="tsAppLinkSenderController.phoneDetails.mobileCode" ts-disabled="tsAppLinkSenderController.loading" class="ng-pristine ng-untouched ng-valid ng-isolate-scope"><div>
+	<select ng-model="bindModel" ng-options="item[bindId] as item[bindDisplay] for item in dropdownData" name="" ng-disabled="settings.error || !dropdownEnabled || disabled" autocomplete="" ng-change="selectionChanged()" class="ng-pristine ng-untouched ng-valid"><option value="" ng-show="false" style="color:gray" class="ng-binding ng-hide" selected="selected">
+    	 
+    </option><option label="+93" value="string:93">+93</option><option label="+355" value="string:355">+355</option><option label="+213" value="string:213">+213</option><option label="+1 684" value="string:1 684">+1 684</option><option label="+376" value="string:376">+376</option><option label="+244" value="string:244">+244</option><option label="+1 264" value="string:1 264">+1 264</option><option label="+672" value="string:672">+672</option><option label="+1 268" value="string:1 268">+1 268</option><option label="+54" value="string:54">+54</option><option label="+374" value="string:374">+374</option><option label="+297" value="string:297">+297</option><option label="+61" value="string:61">+61</option><option label="+43" value="string:43">+43</option><option label="+994" value="string:994">+994</option><option label="+1 242" value="string:1 242">+1 242</option><option label="+973" value="string:973">+973</option><option label="+880" value="string:880">+880</option><option label="+1 246" value="string:1 246">+1 246</option><option label="+375" value="string:375">+375</option><option label="+32" value="string:32">+32</option><option label="+501" value="string:501">+501</option><option label="+229" value="string:229">+229</option><option label="+1 441" value="string:1 441">+1 441</option><option label="+975" value="string:975">+975</option><option label="+591" value="string:591">+591</option><option label="+387" value="string:387">+387</option><option label="+267" value="string:267">+267</option><option label="+55" value="string:55">+55</option><option label="+1 284" value="string:1 284">+1 284</option><option label="+673" value="string:673">+673</option><option label="+359" value="string:359">+359</option><option label="+226" value="string:226">+226</option><option label="+257" value="string:257">+257</option><option label="+855" value="string:855">+855</option><option label="+237" value="string:237">+237</option><option label="+1" value="string:1">+1</option><option label="+238" value="string:238">+238</option><option label="+1 345" value="string:1 345">+1 345</option><option label="+236" value="string:236">+236</option><option label="+235" value="string:235">+235</option><option label="+56" value="string:56">+56</option><option label="+86" value="string:86">+86</option><option label="+61" value="string:61">+61</option><option label="+61" value="string:61">+61</option><option label="+57" value="string:57">+57</option><option label="+269" value="string:269">+269</option><option label="+242" value="string:242">+242</option><option label="+682" value="string:682">+682</option><option label="+225" value="string:225">+225</option><option label="+385" value="string:385">+385</option><option label="+53" value="string:53">+53</option><option label="+357" value="string:357">+357</option><option label="+420" value="string:420">+420</option><option label="+45" value="string:45">+45</option><option label="+253" value="string:253">+253</option><option label="+1 767" value="string:1 767">+1 767</option><option label="+1 809" value="string:1 809">+1 809</option><option label="+593" value="string:593">+593</option><option label="+20" value="string:20">+20</option><option label="+503" value="string:503">+503</option><option label="+240" value="string:240">+240</option><option label="+291" value="string:291">+291</option><option label="+372" value="string:372">+372</option><option label="+251" value="string:251">+251</option><option label="+500" value="string:500">+500</option><option label="+298" value="string:298">+298</option><option label="+679" value="string:679">+679</option><option label="+358" value="string:358">+358</option><option label="+33" value="string:33">+33</option><option label="+689" value="string:689">+689</option><option label="+241" value="string:241">+241</option><option label="+220" value="string:220">+220</option><option label="+995" value="string:995">+995</option><option label="+49" value="string:49">+49</option><option label="+233" value="string:233">+233</option><option label="+350" value="string:350">+350</option><option label="+30" value="string:30">+30</option><option label="+299" value="string:299">+299</option><option label="+1 473" value="string:1 473">+1 473</option><option label="+1 671" value="string:1 671">+1 671</option><option label="+502" value="string:502">+502</option><option label="+224" value="string:224">+224</option><option label="+245" value="string:245">+245</option><option label="+592" value="string:592">+592</option><option label="+509" value="string:509">+509</option><option label="+504" value="string:504">+504</option><option label="+852" value="string:852">+852</option><option label="+36" value="string:36">+36</option><option label="+354" value="string:354">+354</option><option label="+91" value="string:91">+91</option><option label="+62" value="string:62">+62</option><option label="+98" value="string:98">+98</option><option label="+964" value="string:964">+964</option><option label="+353" value="string:353">+353</option><option label="+972" value="string:972">+972</option><option label="+39" value="string:39">+39</option><option label="+1 876" value="string:1 876">+1 876</option><option label="+81" value="string:81">+81</option><option label="+962" value="string:962">+962</option><option label="+7" value="string:7">+7</option><option label="+254" value="string:254">+254</option><option label="+686" value="string:686">+686</option><option label="+965" value="string:965">+965</option><option label="+996" value="string:996">+996</option><option label="+856" value="string:856">+856</option><option label="+371" value="string:371">+371</option><option label="+961" value="string:961">+961</option><option label="+266" value="string:266">+266</option><option label="+231" value="string:231">+231</option><option label="+218" value="string:218">+218</option><option label="+423" value="string:423">+423</option><option label="+370" value="string:370">+370</option><option label="+352" value="string:352">+352</option><option label="+853" value="string:853">+853</option><option label="+389" value="string:389">+389</option><option label="+261" value="string:261">+261</option><option label="+265" value="string:265">+265</option><option label="+60" value="string:60">+60</option><option label="+960" value="string:960">+960</option><option label="+223" value="string:223">+223</option><option label="+356" value="string:356">+356</option><option label="+692" value="string:692">+692</option><option label="+222" value="string:222">+222</option><option label="+230" value="string:230">+230</option><option label="+262" value="string:262">+262</option><option label="+52" value="string:52">+52</option><option label="+691" value="string:691">+691</option><option label="+373" value="string:373">+373</option><option label="+377" value="string:377">+377</option><option label="+976" value="string:976">+976</option><option label="+382" value="string:382">+382</option><option label="+1 664" value="string:1 664">+1 664</option><option label="+212" value="string:212">+212</option><option label="+258" value="string:258">+258</option><option label="+95" value="string:95">+95</option><option label="+264" value="string:264">+264</option><option label="+674" value="string:674">+674</option><option label="+977" value="string:977">+977</option><option label="+31" value="string:31">+31</option><option label="+599" value="string:599">+599</option><option label="+687" value="string:687">+687</option><option label="+64" value="string:64">+64</option><option label="+505" value="string:505">+505</option><option label="+227" value="string:227">+227</option><option label="+234" value="string:234">+234</option><option label="+683" value="string:683">+683</option><option label="+850" value="string:850">+850</option><option label="+1 670" value="string:1 670">+1 670</option><option label="+47" value="string:47">+47</option><option label="+968" value="string:968">+968</option><option label="+92" value="string:92">+92</option><option label="+680" value="string:680">+680</option><option label="+507" value="string:507">+507</option><option label="+675" value="string:675">+675</option><option label="+595" value="string:595">+595</option><option label="+51" value="string:51">+51</option><option label="+63" value="string:63">+63</option><option label="+870" value="string:870">+870</option><option label="+48" value="string:48">+48</option><option label="+351" value="string:351">+351</option><option label="+1" value="string:1">+1</option><option label="+974" value="string:974">+974</option><option label="+40" value="string:40">+40</option><option label="+7" value="string:7">+7</option><option label="+250" value="string:250">+250</option><option label="+290" value="string:290">+290</option><option label="+1 869" value="string:1 869">+1 869</option><option label="+1 758" value="string:1 758">+1 758</option><option label="+1 599" value="string:1 599">+1 599</option><option label="+508" value="string:508">+508</option><option label="+1 784" value="string:1 784">+1 784</option><option label="+685" value="string:685">+685</option><option label="+378" value="string:378">+378</option><option label="+239" value="string:239">+239</option><option label="+966" value="string:966">+966</option><option label="+221" value="string:221">+221</option><option label="+381" value="string:381">+381</option><option label="+248" value="string:248">+248</option><option label="+232" value="string:232">+232</option><option label="+65" value="string:65">+65</option><option label="+421" value="string:421">+421</option><option label="+386" value="string:386">+386</option><option label="+677" value="string:677">+677</option><option label="+252" value="string:252">+252</option><option label="+27" value="string:27" selected="selected">+27</option><option label="+82" value="string:82">+82</option><option label="+34" value="string:34">+34</option><option label="+94" value="string:94">+94</option><option label="+249" value="string:249">+249</option><option label="+597" value="string:597">+597</option><option label="+268" value="string:268">+268</option><option label="+46" value="string:46">+46</option><option label="+41" value="string:41">+41</option><option label="+963" value="string:963">+963</option><option label="+886" value="string:886">+886</option><option label="+992" value="string:992">+992</option><option label="+255" value="string:255">+255</option><option label="+66" value="string:66">+66</option><option label="+243" value="string:243">+243</option><option label="+670" value="string:670">+670</option><option label="+228" value="string:228">+228</option><option label="+690" value="string:690">+690</option><option label="+676" value="string:676">+676</option><option label="+1 868" value="string:1 868">+1 868</option><option label="+216" value="string:216">+216</option><option label="+90" value="string:90">+90</option><option label="+993" value="string:993">+993</option><option label="+1 649" value="string:1 649">+1 649</option><option label="+688" value="string:688">+688</option><option label="+1 340" value="string:1 340">+1 340</option><option label="+256" value="string:256">+256</option><option label="+380" value="string:380">+380</option><option label="+971" value="string:971">+971</option><option label="+44" value="string:44">+44</option><option label="+1" value="string:1">+1</option><option label="+598" value="string:598">+598</option><option label="+998" value="string:998">+998</option><option label="+678" value="string:678">+678</option><option label="+39" value="string:39">+39</option><option label="+58" value="string:58">+58</option><option label="+84" value="string:84">+84</option><option label="+681" value="string:681">+681</option><option label="+967" value="string:967">+967</option><option label="+260" value="string:260">+260</option><option label="+263" value="string:263">+263</option></select>
+  <!-- ngIf: settings.error -->
+
+</div>
+</ts-dropdown-loader>
+            </div>
+
+            <div class="app-link-sms__mobile-number">
+                <input type="tel" name="mobile" class="input ng-pristine ng-untouched ng-valid" placeholder="Mobile number" ng-model="tsAppLinkSenderController.phoneDetails.phoneNumber" ng-disabled="tsAppLinkSenderController.loading" ts-format-phone="" ts-format-phone-code="tsAppLinkSenderController.phoneDetails.mobileCode" autocomplete="tel mobile">
+            </div>
+
+            <div class="app-link-sms__submit">
+              <button class="btn btn--primary app-link-sms__submit-btn" ng-click="tsAppLinkSenderController.sendSms()" ng-hide="tsAppLinkSenderController.loading" translate=""><span class="ng-scope">Send download link</span></button>
+              <!-- ngIf: tsAppLinkSenderController.loading -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ngIf: tsAppLinkSenderController.success === true -->
+    <!-- ngIf: tsAppLinkSenderController.success === false && !tsAppLinkSenderController.noBranchError -->
+    <!-- ngIf: tsAppLinkSenderController.success === false && tsAppLinkSenderController.noBranchError -->
+    <!-- ngIf: tsAppLinkSenderController.validPhoneNumber === false -->
+</form>
+
+</ts-app-link-sender>
+  </div>
+</div>
+
+<div class="flapp-banner__buttons">
+    <button class="flapp-banner__button flapp-banner__button--app-store" ng-click="openAppStore()"></button>
+    <button class="flapp-banner__button flapp-banner__button--google-play" ng-click="openPlayStore()"></button>
+</div>
+</section><!-- end ngIf: function(){return e.$eval(o)&&!t.isInIFrame()} --><!-- end ngIf: searchViewController.ft_responsive_design -->
+</div>
+
+<!-- ngIf: !isStorageSupported && cookiesMessageVisible -->
+
+<!-- ngIf: searchViewController.bookingError -->
+
+
+
+<!-- ngIf: searchViewController.paymentLinkUpdateError -->
+</main>
+<!-- tsHideInIFrame:  --><!-- uiView: footer --><footer ui-view="footer" ts-hide-in-i-frame="" class="ng-scope"><!-- ngIf: footerController.ft_responsive_design --><div ng-if="footerController.ft_responsive_design" class="ng-scope">
+  <div class="footer-top">
+    <div class="footer-nav">
+      <ul class="footer-nav__list">
+        <li class="footer-nav__item">
+          <a ng-href="http://www.travelstart.co.za/lp/about-us" target="_self" class="footer-nav__action" translate="" href="http://www.travelstart.co.za/lp/about-us"><span class="ng-scope">About Us</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="https://www.travelstart.co.za/lp/contact-us" target="_self" class="footer-nav__action" translate="" href="https://www.travelstart.co.za/lp/contact-us"><span class="ng-scope">Contact Details</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="http://www.travelstart.co.za/lp/faq" target="_self" class="footer-nav__action" translate="" href="http://www.travelstart.co.za/lp/faq"><span class="ng-scope">FAQ</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="http://www.travelstart.co.za/lp/jobs/travelstart-careers" target="_self" class="footer-nav__action" translate="" href="http://www.travelstart.co.za/lp/jobs/travelstart-careers"><span class="ng-scope">Careers</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="https://www.travelstart.co.za/press-releases" target="_self" class="footer-nav__action" translate="" href="https://www.travelstart.co.za/press-releases"><span class="ng-scope">Press</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="https://www.travelstart.co.za/terms-and-conditions" target="_self" class="footer-nav__action" translate="" href="https://www.travelstart.co.za/terms-and-conditions"><span class="ng-scope" style="">T&amp;Cs</span></a>
+        </li>
+        <li class="footer-nav__item">
+          <a ng-href="https://www.travelstart.co.za/privacy" target="_self" class="footer-nav__action" translate="" href="https://www.travelstart.co.za/privacy"><span class="ng-scope">Privacy</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="social-links">
+      <ul class="social-links__list">
+        <li class="social-links__item">
+          <a ng-href="http://www.facebook.com/Travelstart" target="_self" class="social-links__action--facebook social-links__action" href="http://www.facebook.com/Travelstart">Facebook</a>
+        </li>
+        <li class="social-links__item">
+          <a ng-href="http://twitter.com/#!/Travelstart/" target="_self" class="social-links__action--twitter social-links__action" href="http://twitter.com/#!/Travelstart/">Twitter</a>
+        </li>
+        <li class="social-links__item">
+          <a ng-href="https://plus.google.com/+Travelstart" target="_self" class="social-links__action--googleplus social-links__action" href="https://plus.google.com/+Travelstart">Google+</a>
+        </li>
+        <li class="social-links__item">
+          <a ng-href="http://www.youtube.com/user/travelstartchannel?sub_confirmation=1" target="_self" class="social-links__action--youtube social-links__action" href="http://www.youtube.com/user/travelstartchannel?sub_confirmation=1">Youtube</a>
+        </li>
+        <li class="social-links__item">
+          <a ng-href="http://www.linkedin.com/company/travelstart" target="_self" class="social-links__action--linkedin social-links__action" href="http://www.linkedin.com/company/travelstart">LinkedIn</a>
+        </li>
+        <li class="social-links__item">
+          <a ng-href="https://www.instagram.com/travelstart" target="_self" class="social-links__action--instagram social-links__action" href="https://www.instagram.com/travelstart">Instagram</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- ngIf: footerController.ft_responsive_design --><div ng-if="footerController.ft_responsive_design" class="trust-logos ng-scope">
+      <span class="trust-logos__text" translate=""><span class="ng-scope">Secured by:</span></span>
+      <img class="trust-logos__icon" ng-src="assets/img/trustlogos/trustlogo-footer-thawte.png" src="assets/img/trustlogos/trustlogo-footer-thawte.png">
+      <img class="trust-logos__icon" ng-src="assets/img/trustlogos/trustlogo-footer-iata.png" src="assets/img/trustlogos/trustlogo-footer-iata.png">
+  </div><!-- end ngIf: footerController.ft_responsive_design -->
+  <!-- ngIf: footerController.ft_responsive_design --><div ng-if="footerController.ft_responsive_design" class="copyright ng-scope" translate=""><span class="ng-scope">Copyright © 1999-2018 Travelstart Online Travel Operations Pty LTD.</span></div><!-- end ngIf: footerController.ft_responsive_design -->
+</div><!-- end ngIf: footerController.ft_responsive_design -->
+<!-- ngIf: !footerController.ft_responsive_design && footerController.showNewsletter -->
+<!-- ngIf: !footerController.ft_responsive_design -->
+<!-- ngIf: !footerController.ft_responsive_design -->
+</footer><!-- end ngIf: function(){return!t.isInIFrame()} -->
+</div>
+<ts-offline-message class="ng-isolate-scope"><!-- ngIf: offline -->
+</ts-offline-message>
+<ts-web-chat><!-- ngIf: webChatController.isWebChatEnabled -->
+</ts-web-chat>
+
+<script type="text/javascript" src="https://cdn.branch.io/branch-latest.min.js"></script>
+
+<span id="root-popup-wrapper">
+<ul class="dropdown-menu ng-isolate-scope ng-hide dropdown-menu-orig-5c6c77d1-9712-450d-97a0-fba483e5ef59" ng-show="isOpen() &amp;&amp; !moveInProgress" ng-style="{top: position().top+'px', left: position().left+'px'}" role="listbox" aria-hidden="true" ng-class="additional_class" uib-typeahead-popup="" id="typeahead-79-677" matches="matches" active="activeIdx" select="select(activeIdx, evt)" move-in-progress="moveInProgress" query="query" position="position" assign-is-open="assignIsOpen(isOpen)" debounce="debounceUpdate" template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html">
+    <!-- ngIf: showingPopularFlights --><li ng-if="showingPopularFlights" class="item-list__heading item-list__heading--desktop ng-scope">
+        <span class="item-list__icon item-list__icon--iata">
+            <img ng-show="$parent.icons_url" ng-src="assets/img/icons/dashed-star.png" class="iata img-disabled" src="assets/img/icons/dashed-star.png">
+        </span>
+        <span class="item-list__text_wrap item-list__text_wrap--airports item-list__text_wrap--with-icon">
+            <span translate=""><span class="ng-scope">Popular locations</span></span>
+        </span>
+    </li><!-- end ngIf: showingPopularFlights -->
+    <!-- ngRepeat: match in matches track by $index -->
+</ul><ul class="dropdown-menu ng-isolate-scope ng-hide dropdown-menu-dest-5c6c77d1-9712-450d-97a0-fba483e5ef59" ng-show="isOpen() &amp;&amp; !moveInProgress" ng-style="{top: position().top+'px', left: position().left+'px'}" role="listbox" aria-hidden="true" ng-class="additional_class" uib-typeahead-popup="" id="typeahead-81-7988" matches="matches" active="activeIdx" select="select(activeIdx, evt)" move-in-progress="moveInProgress" query="query" position="position" assign-is-open="assignIsOpen(isOpen)" debounce="debounceUpdate" template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html">
+    <!-- ngIf: showingPopularFlights --><li ng-if="showingPopularFlights" class="item-list__heading item-list__heading--desktop ng-scope">
+        <span class="item-list__icon item-list__icon--iata">
+            <img ng-show="$parent.icons_url" ng-src="assets/img/icons/dashed-star.png" class="iata img-disabled" src="assets/img/icons/dashed-star.png">
+        </span>
+        <span class="item-list__text_wrap item-list__text_wrap--airports item-list__text_wrap--with-icon">
+            <span translate=""><span class="ng-scope">Popular locations</span></span>
+        </span>
+    </li><!-- end ngIf: showingPopularFlights -->
+    <!-- ngRepeat: match in matches track by $index -->
+</ul></span>
+<script type="text/javascript" src="app.bundle.js?3b4ac840ef3b8751d2ad"></script><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="https://staticxx.facebook.com/connect/xd_arbiter/r/RQ7NiRXMcYA.js?version=42#channel=f393268f70eba9&amp;origin=https%3A%2F%2Fwww.travelstart.co.za" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+
+<div class="offline-ui offline-ui-up"><div class="offline-ui-content"></div><a href="" class="offline-ui-retry"></a></div><div id="vanillatoasts-container"></div><iframe aria-hidden="true" id="ssIFrame_google" sandbox="allow-scripts allow-same-origin" src="https://accounts.google.com/o/oauth2/iframe#origin=https%3A%2F%2Fwww.travelstart.co.za&amp;rpcToken=1781954077.4176984" style="position: absolute; width: 1px; height: 1px; left: -9999px; display: none;"></iframe><script type="text/javascript" id="tag-container-egdharnd-1525848621710">try {
+(function(account, pagePath, profileId, rule){
+function create(i, s, o, g, r, a, m){
+  i["GoogleAnalyticsObject"] = r; 
+
+  i[r] = i[r] || function() {
+    (i[r].q = i[r].q || []).push(arguments)
+  },
+
+    i[r].l = 1 * new Date();
+
+  a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m)  
+}
+if (typeof(ga) == "undefined") {
+  create(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+  ga("create", account, "auto");
+}
+else if (ga.q) {
+  ga.q.unshift(["create", account, "auto"]);
+  create(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+}
+
+// Set value for custom dimension Session ID
+ga('set', 'dimension1', dataLayer.sessionId );
+
+// Set value for custom dimension Innometrics Profile ID
+ga('set', 'dimension2', profileId );
+
+ga('set', 'page', pagePath);
+ga("send", "pageview");
+
+})('UA-31275-9','/','nd0guo6ya3hw4x7cbcufiu8pi5pyekm9',document.getElementById("tag-container-egdharnd-1525848621710").rule);
+} catch (e) {}</script><script type="text/javascript" id="tag-container-fftdinjy-1525848621714">try {
+(function(accountId, hashedEmail, device, rule){
+if (device < 479) {
+        device = "m";
+    } else if (device > 479 && device < 991) {
+        device = "t";
+    } else {
+        device = "d";
+    };
+
+window.criteo_q = window.criteo_q || [];
+        window.criteo_q.push(
+            { event: "setAccount", account: accountId },
+          	{ event: "setSiteType", type: device },
+          	{ event: "setHashedEmail", email: hashedEmail },
+            { event: "viewHome" }
+        );
+})(11171,'',1280,document.getElementById("tag-container-fftdinjy-1525848621714").rule);
+} catch (e) {}</script><div id="tag-container-tshcwcsh-1525848621734"><!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: Flights - Homepage
+URL of the webpage where the tag is expected to be placed: https://www.travelstart.co.za
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 05/17/2016
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://5139389.fls.doubleclick.net/activityi;src=5139389;type=fligh0;cat=fligh001;u13=homepage;u15='+region+';dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<iframe src="https://5139389.fls.doubleclick.net/activityi;src=5139389;type=fligh0;cat=fligh001;u13=homepage;u15=ZA;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove --></div><div id="tag-container-wmbhvpmb-1525848621761"><script>
+!function(e,n,u,a){e.twq||(a=e.twq=function(){a.exe?a.exe.apply(a,arguments):
+a.queue.push(arguments);},a.version='1',a.queue=[],t=n.createElement(u),
+t.async=!0,t.src='//static.ads-twitter.com/uwt.js',s=n.getElementsByTagName(u)[0],
+s.parentNode.insertBefore(t,s))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','nvbrq');
+twq('track','PageView');
+</script></div><script type="text/javascript" id="tag-container-bsnmvbby-1525848621762">try {
+(function(selector, addClass, rule){
+document.querySelector(selector).classList.add(addClass);
+})('span#mtn-subscribe','hidden',document.getElementById("tag-container-bsnmvbby-1525848621762").rule);
+} catch (e) {}</script><script type="text/javascript" id="tag-container-lpweylcv-1525848621764">try {
+(function(selector, addClass, rule){
+document.querySelector(selector).classList.add(addClass);
+})('body.ts-in-i-frame label.mtn-subscribe__cta','hidden',document.getElementById("tag-container-lpweylcv-1525848621764").rule);
+} catch (e) {}</script><div id="tag-container-qitnwgmi-1525848621776"><script>
+  (function(w,d,t,r,u){
+    var f,n,i;
+    w[u]=w[u]||[],f=function(){
+      var o={
+        ti:"5560926"}
+          ;o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")}
+      ,n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){
+        var s=this.readyState;
+        s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)}
+        ,i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)}
+  )(window,document,"script","//bat.bing.com/bat.js","uetq");
+
+</script>
+
+<script>
+        var varRevenue = false;
+</script>
+
+
+<script> 
+window.uetq = window.uetq || []; window.uetq.push({ 'gv': varRevenue, 'gc': 'ZAR'}); 
+</script>
+
+<noscript>
+  <img src="//bat.bing.com/action/0?ti=5560926&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" />
+</noscript>
+
+</div><div id="tag-container-gvwipoox-1525848621777">
+<img src="https://cm.g.doubleclick.net/pixel?google_nid=mainadv&amp;google_ula=451286232&amp;google_cm&amp;ptype15=home&amp;cok15=dr_tvs_za&amp;cnty15=ZAF" width="1" height="1">
+</div><script type="text/javascript" id="tag-container-nvtsrggo-1525848621822">try {
+(function(rule){
+(function(w,d,u,g,s,n,o) {
+w[g]=w[g]||[];w[g].push(["setTrackerUrl",u+"t"]);w[g].push(["setSiteId",200]);
+o=d.getElementsByTagName(s)[0];n=d.createElement(s);
+n.type="text/javascript";n.defer=true;n.async=true;n.src=u+"t200.js";o.parentNode.insertBefore
+(n,o);
+})(window,document,"https://travelstart-co-za.dcmn.com/","_dcmn","script");
+window._dcmn = typeof window._dcmn == "undefined" ? [] : window._dcmn;
+window.dcmn_page_type = 'home';
+window._dcmn.push(["trackPageView"]);
+})(document.getElementById("tag-container-nvtsrggo-1525848621822").rule);
+} catch (e) {}</script><div id="tag-container-fwcwadob-1525848621830"><!-- Engage Web Tracking Code -->
+
+
+<!-- Please insert the following code between your HTML document head tags to maintain a common reference to a unique visitor across one or more external web tracked sites. -->
+<meta name="com.silverpop.brandeddomains" content="www.pages02.net,www.geziko.com,www.travelstart.ae,www.travelstart.co.bw,www.travelstart.co.ke,www.travelstart.co.tz,www.travelstart.co.za,www.travelstart.co.zw,www.travelstart.com,www.travelstart.com.bh,www.travelstart.com.eg,www.travelstart.com.kw,www.travelstart.com.na,www.travelstart.com.ng,www.travelstart.com.om,www.travelstart.com.sa,www.travelstart.ma,www.travelstart.pk,www.travelstart.qa">
+
+
+<!-- Optionally uncomment the following code between your HTML document head tags if you use Engage Conversion Tracking (COT). -->
+<!--<meta name="com.silverpop.cothost" content="pod2.ibmmarketingcloud.com" />-->
+<script src="https://www.sc.pages02.net/lp/static/js/iMAWebCookie.js?300ff3dc-153c9b3d830-df4cba773885eb54dfcebd294a039c37&amp;h=www.pages02.net" type="text/javascript"></script></div><div id="tag-container-dwqydlcl-1525848621836"><script async="" src="//travelstartcoza.api.sociaplus.com/partner.js"></script></div><div id="tag-container-jxpwbmvo-1525848621870"><iframe src="//creativecdn.com/tags?id=pr_YxfOo2UF0c2KqHjVauDI_home" width="1" height="1" scrolling="no" frameborder="0" style="display:
+none;"></iframe></div><iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" src="https://vars.hotjar.com/rcj-99d43ead6bdf30da8ed5ffcb4f17100c.html"></iframe><iframe id="spWorker" src="https://travelstartcoza.api.sociaplus.com/worker.html" style="display: none;"></iframe><div id="criteo-tags-div" style="display: none;"></div><div id="ads"></div><script type="text/javascript" id="tag-container-brdjgvbt-1525848704747">try {
+(function(account, cat, act, label, value, nonInteraction, rule){
+var val  = isNaN(parseFloat(value)) ? undefined : parseFloat(value);
+
+if (typeof(ga) == "undefined") {
+  
+  (function(i, s, o, g, r, a, m){
+    i['GoogleAnalyticsObject'] = r; 
+
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    },    i[r].l = 1 * new Date();
+  
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)  
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+  
+  ga('create', account, 'auto');
+}
+
+
+var o = {
+  'hitType': 'event',
+  'eventCategory': cat,
+  'eventAction': act
+}
+if( label ){  
+	o.eventLabel = label;
+}
+if( value ){
+  o.eventValue = value;
+}
+
+if( nonInteraction ){
+	o.nonInteraction = nonInteraction;
+}
+    
+ga('send', o);
+
+})('Ua-31275-9','/','Header-Links','My Trips','',false,document.getElementById("tag-container-brdjgvbt-1525848704747").rule);
+} catch (e) {}</script></body>

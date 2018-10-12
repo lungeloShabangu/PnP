@@ -1,0 +1,72 @@
+
+<div class="search-form__row" ng-class="{'search-form__row--multi': searchFormController.searchData.tripType === 'multi'}">		
+	<div class="search-form__itins">
+		<div ng-repeat="itin in searchFormController.searchData.itineraries | limitTo:searchFormController.itinLimit" ng-class="{'search-form__itin--last': $last}" class="ng-scope search-form__itin--last">
+			<div class="search-form__itin">
+				<div class="search-form__locations">
+														
+					<div class="search-form__origin">
+						<label class="search-form__label" translate=""><span class="ng-scope">From</span></label>
+
+						<div class="airports-inline-wrapper ">
+							<div class="rendered-input__wrapper search-form__airport--wrapper search-form__input" ng-class="airportsController.applyClass">
+								<input id="airports-inline-orig-923a6740-58b2-482e-92ed-dccbe2d66ce8" type="text" clear-field="" clear-field-no-wrap="true" class="rendered-input__input rendered-input__input--clear-field ng-pristine ng-untouched ng-valid clear-field__input search-form__input" ng-class="airportsController.applyClass" ng-model="airportsController.airport" placeholder="Enter departure city" uib-typeahead="airport for airport in airportsController.getAirport($viewValue)" typeahead-loading="airportsController.loadingLocations" typeahead-no-results="airportsController.noResults" typeahead-popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html" typeahead-template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" typeahead-on-select="airportsController.onSelect($item, $model, $label, $event)" typeahead-min-length="0" typeahead-focus-on-select="false" ng-focus="airportsController.focused()" ng-blur="airportsController.blurred()" ng-keyup="airportsController.keyup($event)" ts-append-to="airportsController.rootAirportWrapper" typeahead-append-to-body="true" ts-extend-typeahead-scope="{showingPopularFlights: airportsController.showingPopularFlights, icons_url: airportsController.iconsUrl, additional_class: 'dropdown-menu-' + airportsController.direction + '-' + airportsController.itinId}" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-73-3109"><span ng-show="enabled" ng-mousedown="reset()" class="clear-field__icon ng-scope ng-hide"></span>							   
+							</div>											
+						</div>
+					</div>
+					<div class="search-form__destination">
+						<label class="search-form__label" translate=""><span class="ng-scope">To</span></label>
+						<div class="airports-inline-wrapper ">
+							<div class="rendered-input__wrapper search-form__airport--wrapper search-form__input" ng-class="airportsController.applyClass">
+								<input id="airports-inline-dest-923a6740-58b2-482e-92ed-dccbe2d66ce8" type="text" clear-field="" clear-field-no-wrap="true" class="rendered-input__input rendered-input__input--clear-field ng-pristine ng-untouched ng-valid clear-field__input search-form__input" ng-class="airportsController.applyClass" ng-model="airportsController.airport" placeholder="Enter arrival city" uib-typeahead="airport for airport in airportsController.getAirport($viewValue)" typeahead-loading="airportsController.loadingLocations" typeahead-no-results="airportsController.noResults" typeahead-popup-template-url="general/components/uib-typeahead/uib-typeahead-popup-desktop.tpl.html" typeahead-template-url="general/components/uib-typeahead/uib-typeahead-desktop.tpl.html" typeahead-on-select="airportsController.onSelect($item, $model, $label, $event)" typeahead-min-length="0" typeahead-focus-on-select="false" ng-focus="airportsController.focused()" ng-blur="airportsController.blurred()" ng-keyup="airportsController.keyup($event)" ts-append-to="airportsController.rootAirportWrapper" typeahead-append-to-body="true" ts-extend-typeahead-scope="{showingPopularFlights: airportsController.showingPopularFlights, icons_url: airportsController.iconsUrl, additional_class: 'dropdown-menu-' + airportsController.direction + '-' + airportsController.itinId}" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-75-1039"><span ng-show="enabled" ng-mousedown="reset()" class="clear-field__icon ng-scope ng-hide"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="search-form__dates">
+					<div class="search-form__depart-date">
+						<span id="depart-date-link-923a6740-58b2-482e-92ed-dccbe2d66ce8" class="search-form__depart-date-action search-form__date-action search-form__round-trip" ng-click="searchFormController.openDepartDateInput(itin.id)" ng-class="[searchFormController.searchData.tripType === 'return' ? 'search-form__round-trip': 'input-holder--has-arrow']">
+							<span class="text-group ng-scope" ng-if="!itin.departDate">
+								<span class="text-group__outer">&nbsp;</span>
+								<span class="text-group__body">
+									<span class="text-group__heading" translate=""><span class="ng-scope">Depart</span></span>
+									<span class="text-group__subheading" translate=""><span class="ng-scope">Date</span></span>
+								</span>									
+							</span><!-- end ngIf: !itin.departDate -->
+						</span>
+					</div>
+					<span class="dates-block--return ng-scope" ng-if="searchFormController.searchData.tripType === 'return'"></span><!-- end ngIf: searchFormController.searchData.tripType === 'return' -->
+					<div class="search-form__return-date">
+						<span id="return-date-link-923a6740-58b2-482e-92ed-dccbe2d66ce8" ng-if="searchFormController.searchData.tripType === 'return'" class="search-form__return-date-action search-form__date-action ng-scope search-form__round-trip" ng-click="searchFormController.openReturnDateInput(itin.id)" ng-class="searchFormController.searchData.tripType === 'return' ? 'search-form__round-trip' : ''">								  
+							<span class="text-group ng-scope" ng-if="!itin.returnDate">
+								<span class="text-group__outer">&nbsp;</span>
+								<span class="text-group__body">
+									<span class="text-group__heading" translate=""><span class="ng-scope">Return</span></span>
+									<span class="text-group__subheading" translate=""><span class="ng-scope">Date</span></span>
+								</span>
+							</span>
+						</span>
+					</div>								   								  
+				</div>
+			</div>								   
+		</div>
+	</div>
+	<div class="search-form__travellers">
+		<span id="add-traveller-link" class="search-form__travellers-action" ng-click="searchFormController.openTravellersInput()">
+			<span class="text-group text-group--single">
+				<span class="text-group__outer ng-binding">1</span>
+				<span class="text-group__body">
+					<span class="text-group__heading">
+						<span translate="" translate-n="searchFormController.getTravellerCount()" translate-plural="Travellers"><span class="ng-scope">Traveller</span></span>
+					</span>
+					<span class="text-group__subheading">
+						<span translate="" translate-plural=" Adults" translate-n="searchFormController.travellers.adults"><span class="ng-scope">1 Adult</span></span>
+					</span>
+				</span>
+			</span>
+		</span>
+	</div>
+	<div class="search-form__submit">
+		<button id="search-for-flights-button" ng-class="{'btn--primary-disabled':!searchFormController.isInline &amp;&amp; !searchFormController.validSearch &amp;&amp; searchFormController.showValidationErrors, 'btn--primary': !searchFormController.isInline, 'btn--secondary': searchFormController.isInline, 'btn--secondary-disabled': searchFormController.isInline &amp;&amp; !searchFormController.validSearch &amp;&amp; searchFormController.showValidationErrors}" ng-click="searchFormController.submitSearch()" class="btn btn--search btn--primary btn--large" translate=""><span class="ng-scope">Search</span></button>
+	</div>
+</div>
